@@ -2,7 +2,6 @@ local fov_max = 40.0
 local fov_min = 80.0
 local zoomspeed = 100.0
 local fov = (fov_max+fov_min)*0.5
-local coords = Config.Location
 local toggle = false;
 
 prop = nil
@@ -135,50 +134,71 @@ end
 
 function closeVehicleShop()
     DoScreenFadeOut(500)
+    Wait(500)
+    if newVehicle and DoesEntityExist(newVehicle) then
+        DeleteEntity(newVehicle)
+        newVehicle = nil
+        spawnVehicle = false
+    end
     FreezeEntityPosition(PlayerPedId(), false)
     SetEntityVisible(PlayerPedId(), true, false)
-    Wait(1000)
-    TriggerEvent("change:time", false)
     SetNuiFocus(false, false)
-    SetEntityCoords(PlayerPedId(), coords.x, coords.y, coords.z)
-    DoScreenFadeIn(1000)
-    RenderScriptCams(false, false, 1, true, true)
+    SendNUIMessage({action = "close"})
+    SetEntityCoords(PlayerPedId(), Config.Location.x, Config.Location.y, Config.Location.z)
+    SetEntityHeading(PlayerPedId(), Config.Location.w or 0.0)
+    TriggerEvent("change:time", false)
+    RenderScriptCams(false, false, 0, true, true)
     DestroyAllCams(true)
+    Wait(500)
+    DoScreenFadeIn(1000)
     Wait(1000)
 end
 
 function closeVehicleShopAfterBuy()
     SetNuiFocus(false, false)
     DoScreenFadeOut(500)
+    Wait(500)
+    if newVehicle and DoesEntityExist(newVehicle) then
+        DeleteEntity(newVehicle)
+        newVehicle = nil
+        spawnVehicle = false
+    end
     FreezeEntityPosition(PlayerPedId(), false)
     SetEntityVisible(PlayerPedId(), true, false)
-    Wait(2000)
-    SetEntityCoords(PlayerPedId(),Config.LocationAfterBuy.x, Config.LocationAfterBuy.y, Config.LocationAfterBuy.z)
+    SetEntityCoords(PlayerPedId(), Config.LocationAfterBuy.x, Config.LocationAfterBuy.y, Config.LocationAfterBuy.z)
+    SetEntityHeading(PlayerPedId(), Config.LocationAfterBuy.w or 0.0)
     TriggerEvent("change:time", false)
-    SetEntityHeading(PlayerPedId(), Config.LocationAfterBuy.w)
     TriggerEvent("vehicles:client:anim")
     SendNUIMessage({action = "vehicleBought"})
     toggle = true
     CreateThread(disable)
-    DoScreenFadeIn(1000)
-    RenderScriptCams(false, false, 1, true, true)
+    RenderScriptCams(false, false, 0, true, true)
     DestroyAllCams(true)
-    Wait(5000)
+    Wait(500)
+    DoScreenFadeIn(1000)
+    Wait(4000)
     toggle = false
     close()
 end
 
 function closeVehicleShopTestDrive()
     SetNuiFocus(false, false)
+    DoScreenFadeOut(500)
+    Wait(500)
+    if newVehicle and DoesEntityExist(newVehicle) then
+        DeleteEntity(newVehicle)
+        newVehicle = nil
+        spawnVehicle = false
+    end
     FreezeEntityPosition(PlayerPedId(), false)
     SetEntityVisible(PlayerPedId(), true, false)
-    DoScreenFadeOut(500)
-    Wait(2000)
-    SetEntityCoords(PlayerPedId(), vector3(-31.46917, -1104.683, 26 - 0.5))
+    SetEntityCoords(PlayerPedId(), Config.TestDriveFinishLocation.x, Config.TestDriveFinishLocation.y, Config.TestDriveFinishLocation.z)
+    SetEntityHeading(PlayerPedId(), Config.TestDriveFinishLocation.w or 0.0)
     TriggerEvent("change:time", false)
-    DoScreenFadeIn(1000)
-    RenderScriptCams(false, false, 1, true, true)
+    RenderScriptCams(false, false, 0, true, true)
     DestroyAllCams(true)
+    Wait(500)
+    DoScreenFadeIn(1000)
 end
 
 function DrawText3Ds(x, y, z, text)

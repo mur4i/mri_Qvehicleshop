@@ -1,28 +1,32 @@
 fx_version 'cerulean'
 game 'gta5'
 
+author 'Murai'
+description 'Vehicle Shop'
+version '1.0.0'
+lua54 'yes'
+use_experimental_fxv2_oal 'yes'
 
-version '1.1.0'
-
-
-
-client_scripts {
-    "config.lua",
-    "client/functions.lua",
-    "client/client.lua"
-} 
-server_script {
-    "@oxmysql/lib/MySQL.lua",
-    "config.lua",
-    "server/server.lua"
-}
-
-files {
-    "ui/*",
-}
+ox_lib 'locale'
 
 ui_page {"ui/index.html"}
 
+shared_scripts {
+    '@ox_lib/init.lua',
+    'config.lua',
+    'shared/*.lua',
+}
 
+client_scripts {
+    'client/*.lua',
+}
 
-lua54 'yes'
+server_scripts {
+    '@oxmysql/lib/MySQL.lua',
+    'server/*.lua',
+}
+
+files {
+    'locales/*.json',
+    'ui/*'
+}

@@ -14,8 +14,8 @@ RegisterNetEvent("vehicles:server:openUI",function()
     local already = {}
     local dailyVehicles = {}
     local src = source
-    local name = Config.GetPlayerNameFunc(src,QBCore)
-    TriggerClientEvent('vehicles:client:openUI', src, data, daily,name)
+    local name = Config.GetPlayerNameFunc(src, QBCore)
+    TriggerClientEvent('vehicles:client:openUI', src, data, daily, name)
 end)
 
 CreateThread(function()

@@ -4,7 +4,7 @@ local pedSpawned = false
 
 local function whenStarted()
     if Config.Blip.showBlip then
-        local blip = AddBlipForCoord(Config.Location)
+        local blip = AddBlipForCoord(Config.Location.x, Config.Location.y, Config.Location.z)
         SetBlipSprite(blip, Config.Blip.id)
         SetBlipColour(blip, Config.Blip.color)
         SetBlipScale(blip, Config.Blip.scale)
@@ -34,7 +34,7 @@ local function whenStarted()
                 type = "client",
                 event = "mri_Qvehicleshop:target",
                 icon = "fas fa-car",
-                label = "Concessionária de Veículos",
+                label = locale("target.text"),
             }
         },
         distance = 2.0
@@ -95,7 +95,7 @@ RegisterNUICallback("spawnVehicle", function(data,cb)
         RequestModel(hash) 
         while not HasModelLoaded(hash) do Wait(250) end
         loadVeh = true
-        newVehicle = CreateVehicle(hash, Config.ShopCamera.vehicle.x, Config.ShopCamera.vehicle.y, Config.ShopCamera.vehicle.z, Config.ShopCamera.vehicle.w, false, false)
+        newVehicle = CreateVehicle(hash, Config.vehicleShowroom.x, Config.vehicleShowroom.y, Config.vehicleShowroom.z, Config.vehicleShowroom.w, false, false)
         SetVehicleCustomPrimaryColour(newVehicle, 255, 255, 255)
         SetVehicleCustomSecondaryColour(newVehicle, 255, 255, 255)
         local vehicleInfo = {
@@ -112,7 +112,7 @@ RegisterNUICallback("spawnVehicle", function(data,cb)
         RequestModel(hash)
         while not HasModelLoaded(hash) do Wait(250) end
         loadVeh = true
-        newVehicle = CreateVehicle(hash, Config.ShopCamera.vehicle.x, Config.ShopCamera.vehicle.y, Config.ShopCamera.vehicle.z, Config.ShopCamera.vehicle.w, false, false)
+        newVehicle = CreateVehicle(hash, Config.vehicleShowroom.x, Config.vehicleShowroom.y, Config.vehicleShowroom.z, Config.vehicleShowroom.w, false, false)
         SetVehicleCustomPrimaryColour(newVehicle, 255, 255, 255)
         SetVehicleCustomSecondaryColour(newVehicle, 255, 255, 255)
         local vehicleInfo = {
@@ -155,28 +155,39 @@ RegisterNUICallback("testDrive", function(data,cb)
             local modelHash = GetHashKey(vehDetails.model)
             RequestModel(modelHash) 
             while not HasModelLoaded(modelHash) do Wait(250) end 
-            local boughtVeh = CreateVehicle(modelHash, Config.TestVehicleSpawnLocation.coords,Config.TestVehicleSpawnLocation.heading, true, true)
+            local boughtVeh = CreateVehicle(modelHash, Config.TestVehicleSpawnLocation.x, Config.TestVehicleSpawnLocation.y, Config.TestVehicleSpawnLocation.z, Config.TestVehicleSpawnLocation.w, true, true)
             NetworkRegisterEntityAsNetworked(boughtVeh)
             TaskWarpPedIntoVehicle(PlayerPedId(),boughtVeh,-1)
             Config.TestDriveFunc(QBCore,boughtVeh)
             local netID = NetworkGetNetworkIdFromEntity(boughtVeh)
             local time = data.timer
-            while time >= 0 do
+
+            local exited = false
+            CreateThread(function()
+                while time >= 0 and not exited do
+                    Wait(0)
+                    Utils.ShowMissionText(locale("testdrive.text"), 1)
+                    if IsControlJustPressed(0, Config.TestDrive.exitKey) then
+                        exited = true
+                    end
+                end
+            end)
+
+            while time >= 0 and not exited do
                 Wait(1000)
                 time = time - 1
             end
-            
+
             SendNUIMessage({action = "hideTimer"})
             DoScreenFadeOut(1000)
             Wait(2000)
             TriggerServerEvent("vehicleshop:testdrive", netID)
-            SetEntityCoords(PlayerPedId(), Config.TestDriveFinishLocation)
+            SetEntityCoords(PlayerPedId(), Config.TestDriveFinishLocation.x, Config.TestDriveFinishLocation.y, Config.TestDriveFinishLocation.z)
+            SetEntityHeading(PlayerPedId(), Config.TestDriveFinishLocation.w)
             SetEntityVisible(PlayerPedId(), true, false)
-
             DoScreenFadeIn(500)
         end
     end, Config.TestDrive.testDriveCost)
-
 end)
 
 RegisterNUICallback("changeColor", function(data,cb)
@@ -220,17 +231,16 @@ function changeCam()
     DoScreenFadeOut(500)
     Wait(1000)
     inShop = true
-    SetEntityCoords(PlayerPedId(), Config.ShopCamera.position)
+    SetEntityCoords(PlayerPedId(), Config.cameraShowroom.x, Config.cameraShowroom.y, Config.cameraShowroom.z)
     FreezeEntityPosition(PlayerPedId(), true)
     SetEntityVisible(PlayerPedId(), false, false)
     if not DoesCamExist(cam) then
         cam = CreateCam('DEFAULT_SCRIPTED_CAMERA', true)
     end
     SetCamActive(cam, true)
-    SetCamRot(cam,vector3(-15.0,0.0, 71.19), true)
-    SetCamFov(cam,35.0)
-    SetCamCoord(cam, Config.ShopCamera.position)
-    PointCamAtCoord(cam, Config.ShopCamera.point)
+    SetCamFov(cam, 35.0)
+    SetCamCoord(cam, Config.cameraShowroom.x, Config.cameraShowroom.y, Config.cameraShowroom.z)
+    PointCamAtCoord(cam, Config.vehicleShowroom.x, Config.vehicleShowroom.y, Config.vehicleShowroom.z)
     RenderScriptCams(true, false, 2500.0, true, true)
     DoScreenFadeIn(1000)
     Wait(1000)
@@ -325,10 +335,10 @@ RegisterNUICallback("blur",function(data,cb)
     SetTimecycleModifier('hud_def_blur')
 end)
 
-AddEventHandler("onResourceStop",function(res)
-    if res ~= GetCurrentResourceName() or inShop == false then return end
+AddEventHandler("onResourceStop",function(resource)
+    if resource ~= GetCurrentResourceName() then return end
     if Config.Debug then
-        SetEntityCoords(PlayerPedId(), Config.Location)
+        SetEntityCoords(PlayerPedId(), Config.Location.x, Config.Location.y, Config.Location.z)
         FreezeEntityPosition(PlayerPedId(),false)
         SetEntityVisible(PlayerPedId(), true, false)
     end

@@ -16,15 +16,13 @@ Config.ShopNPC = {
 Config.LocationAfterBuy = vec4(-51.03, -1106.15, 26.44, 154.59)
 Config.GarageName = "Pillbox Garage Parking" -- The name of the garage where the purchased vehicles will be stored.
 
-Config.BoughtVehicleSpawnLocation = {coords= vector3(-53.75075, -1111.026, 25.828771),heading = 72.2} -- The location where the purchased vehicle will be spawned.
-Config.TestVehicleSpawnLocation = {coords= vector3(-997.56, -3341.85, 13.94),heading = 63.87} -- The location where the testdrive vehicle will be spawned.
-Config.TestDriveFinishLocation = vector3(-31.46917, -1104.683, 26 - 0.5) -- The location where the player will be teleported after finishing the test drive.
+Config.BoughtVehicleSpawnLocation = vector4(-53.75075, -1111.026, 25.828771, 72.2) -- The location where the purchased vehicle will be spawned.
+Config.TestVehicleSpawnLocation = vector4(-997.56, -3341.85, 13.94, 63.87) -- The location where the testdrive vehicle will be spawned.
+Config.TestDriveFinishLocation = vec4(-34.8, -1102.85, 26.42, 245.56) -- The location where the player will be teleported after finishing the test drive.
 
-Config.ShopCamera = {
-  vehicle = vector4(-76.24, -821.28, 284.32, 160.91),
-  position = vector3(-66.27, -824.81, 286.9),
-  point = vector3(-66.27, -824.81, 286.9)
-}
+Config.vehicleShowroom = vector4(-76.24, -821.28, 284.32, 160.91)
+
+Config.cameraShowroom = vector3(-66.27, -824.81, 286.9)
 
 Config.Location = vector3(-33.07752, -1102.078, 26.422332) -- The location of the vehicleshop.
 Config.Blip = {
@@ -50,8 +48,9 @@ Config.NumOfVehicles = 5 -- The amount of vehicles that will be added to the sto
 ------------------------------------------------------------------------------------------------------------------------
 
 Config.TestDrive = {
+    exitKey = 168,
     testDriveTimer = 120, -- Duration of the test drive (seconds).
-    testDriveCost = 5000, -- The price of the test drive.
+    testDriveCost = 100, -- The price of the test drive.
 }
 
 ------------------------------------------------------------------------------------------------------------------------
