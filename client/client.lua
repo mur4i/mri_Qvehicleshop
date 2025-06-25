@@ -32,9 +32,9 @@ local function whenStarted()
         options = {
             {
                 type = "client",
-                event = "rn-vehicleshop:target",
+                event = "mri_Qvehicleshop:target",
                 icon = "fas fa-car",
-                label = "Galerici Michael",
+                label = "Concessionária de Veículos",
             }
         },
         distance = 2.0
@@ -42,8 +42,8 @@ local function whenStarted()
     pedSpawned = true
 end
 
-RegisterNetEvent('rn-vehicleshop:target')
-AddEventHandler('rn-vehicleshop:target', function()
+RegisterNetEvent('mri_Qvehicleshop:target')
+AddEventHandler('mri_Qvehicleshop:target', function()
     SendNUIMessage({action = "undraw"})
     changeCam()
     TriggerServerEvent("vehicles:server:openUI")
@@ -130,7 +130,7 @@ RegisterNUICallback("buyVehicle", function(data,cb)
 	QBCore.Functions.TriggerCallback("vehicleshop:getMoney",function(bool)
 		if bool then
             SendNUIMessage({action = "buyvehicle"})
-			TriggerServerEvent("rn-vehicleshop:removeStock",data.details.model)
+			TriggerServerEvent("mri_Qvehicleshop:removeStock",data.details.model)
 			DeleteEntity(newVehicle)
 			closeVehicleShopAfterBuy()
 			inShop = false

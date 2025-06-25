@@ -133,7 +133,7 @@ QBCore.Functions.CreateCallback("vehicleshop:getMoney", function(src,cb,price)
     cb(false)
 end)
 
-RegisterNetEvent("rn-vehicleshop:removeStock",function(model)
+RegisterNetEvent("mri_Qvehicleshop:removeStock",function(model)
     for i=1,#data do
         if data[i].model == model then
           if data[i].stock > 0 then
@@ -146,7 +146,7 @@ end)
 
 
 
-RegisterNetEvent('rn-vehicleshop:setVehicleOwned', function(vehicleData)
+RegisterNetEvent('mri_Qvehicleshop:setVehicleOwned', function(vehicleData)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
 

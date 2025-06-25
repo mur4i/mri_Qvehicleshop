@@ -14,7 +14,7 @@ Config.Blip = {
   id = 326,
   color = 3,
   scale = 0.8,
-  label = "Galeri",
+  label = "Concessionária",
   showBlip = true
 }
 
@@ -417,7 +417,7 @@ Config.BuyVehicleFunc = function(QBCore,vehicleEntity,vehicleName)
     vehicleProps.displayName = vehicleName
     TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(vehicleEntity), vehicleEntity)
     --TriggerServerEvent('nkoVehicle:server:BuyVehicle', GetVehicleNumberPlateText(vehicleEntity), GetLabelText(GetDisplayNameFromVehicleModel(model)))
-    TriggerServerEvent('rn-vehicleshop:setVehicleOwned', vehicleProps)
+    TriggerServerEvent('mri_Qvehicleshop:setVehicleOwned', vehicleProps)
 end
 
 Config.TestDriveFunc = function(QBCore,vehicleEntity)
@@ -480,7 +480,7 @@ Config.GetPlayerNameFunc = function(playerId,QBCore)
 end
 
 Config.ResetStockEvent = {
-    name = "rn-vehicleshop:resetstock", -- This event resets the vehicles' stock. [*Server Side*],
+    name = "mri_Qvehicleshop:resetstock", -- This event resets the vehicles' stock. [*Server Side*],
     safe_for_net = true --[[
         true = allows you to trigger the event from a client side script and from a server side script.
         false =  allows you to trigger the event from a server side script only.
@@ -488,7 +488,7 @@ Config.ResetStockEvent = {
 }
    
 Config.SetDefaultStockEvent = {
-  name = "rn-vehicleshop:setDefaultStock", -- This event generates the stock.json file with values from the config.lua [*It is recommended to do it on first launch.]
+  name = "mri_Qvehicleshop:setDefaultStock", -- This event generates the stock.json file with values from the config.lua [*It is recommended to do it on first launch.]
   safe_for_net = true --[[
     true = allows you to trigger the event from a client side script and from a server side script.
     false =  allows you to trigger the event from a server side script only.

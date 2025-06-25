@@ -26,14 +26,12 @@ body{
 }
 #title-vehiclename{
 	font-family: 'Barlow Condensed', sans-serif;
-
-
 	text-shadow: 3px 3px 6px rgba(0,0,0,0.69);
 	font-size: 4.0rem;
 }
 #title-vehiclecategory{
 	font-size: 2.0rem;
-	color: #0066ff;
+	color: #00ff0d;
 	margin-top: -15px;
 }
 #title-stock,#title-price{
@@ -191,14 +189,14 @@ body{
 	font-family: "Barlow Condensed", sans-serif;
 	background-color: rgba(10, 10, 10, 0.781);
 	border-radius: 4px;
-	height: 250px;
+	height: 280px;
 	font-size: 1.2rem;
 	z-index: -1;
 }
 .vehicle-stat{
 	margin-left: 15px;
 	height: auto;
-	margin-top: 17px;
+	padding-top: 17px;
 }
 .stat-name{
 	margin-left: 1px;
@@ -559,7 +557,7 @@ input[type=range]::-webkit-slider-thumb {
 	display: none;
 	font-family: "Barlow Condensed", sans-serif;
 	position: absolute;
-	bottom: 12%;
+	bottom: 40%;
 	right: 1%;
 	font-size: 4.0rem;
 }

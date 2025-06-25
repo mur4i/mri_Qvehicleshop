@@ -1,4 +1,8 @@
+# credits to
 # rn-vehicleshop
+
+https://github.com/mertvein/rn-vehicleshop/
+
 - Advanced Buying Cars [QBCORE]
 - New QBCore
 

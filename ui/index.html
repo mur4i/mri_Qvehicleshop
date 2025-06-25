@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css"/>
@@ -18,8 +18,8 @@
   <body>
     <div id="title-container">
       <div id="title-vehicleinfo">
-          <div id="title-vehiclename">Araç Seç</div>
-          <div id="title-vehiclecategory">Spor</div>
+          <div id="title-vehiclename">Escolha o Veículo</div>
+          <div id="title-vehiclecategory">Esportivo</div>
           <div style="margin-top: 10px;">
           </div>
           <div id="color-warp">
@@ -42,7 +42,7 @@
       <div id="statistics-container">
           <div id="vehicle-stat-container">
               <div class="vehicle-stat engine">
-                  <div class="stat-name">Maksimum Hız (MPH):</div>
+                  <div class="stat-name">Velocidade Máxima (MPH):</div>
                   <div class="stat-progress-container">
                       <div class="stat-progress">
                           <div class="prog-line speed-line"></div>
@@ -51,7 +51,7 @@
                   </div>
               </div>
               <div class="vehicle-stat brakes">
-                  <div class="stat-name">Hızlanma:</div>
+                  <div class="stat-name">Aceleração:</div>
                   <div class="stat-progress-container">
                       <div class="stat-progress">
                           <div class="prog-line acceleration-line"></div>
@@ -60,7 +60,7 @@
                   </div>
               </div>
               <div class="vehicle-stat transition">
-                  <div class="stat-name">Fren:</div>
+                  <div class="stat-name">Freio:</div>
                   <div class="stat-progress-container">
                       <div class="stat-progress">
                           <div class="prog-line braking-line"></div>
@@ -69,7 +69,7 @@
                   </div>
               </div>
               <div class="vehicle-stat blalba">
-                  <div class="stat-name">Tork Gücü:</div>
+                  <div class="stat-name">Torque:</div>
                   <div class="stat-progress-container">
                       <div class="stat-progress">
                           <div class="prog-line traction-line"></div>
@@ -80,17 +80,17 @@
           </div>
       </div>
       <div id="btn-warp">
-          <div id="hide-button">Önizleme</div>
+          <div id="hide-button">Pré-visualizar</div>
           <div id="btn-container" style="display: none;">
             <a id="buy-btn" class="btn btn-success" style="margin-top: 50px; width: 320px;">
-                <span class='btn-text'>Satın Al</span>
+                <span class='btn-text'>Comprar</span>
             </a>
             <div style="display: flex;">
                 <a id="back-btn" class="btn btn-danger" style="margin-top: 10px; width: 182px; margin-right: 5px;">
-                    <span class='btn-text back'>İptal</span>
+                    <span class='btn-text back'>Cancelar</span>
                 </a>
                 <a id="test-btn" class="btn btn-warn" style="margin-top: 10px; margin-left: 5px;">
-                    <span class='btn-text'>Test Sürüşü</span>
+                    <span class='btn-text'>Test Drive</span>
                 </a>
             </div>
         </div>
@@ -99,8 +99,8 @@
 
   <div id="vehicle-class-title-container">
       <div id="vehicle-class-title-vehicleinfo">
-          <div id="vehicle-class-title-vehiclename">Araç Galerisi</div>
-          <div id="vehicle-class-title-vehiclecategory">Bir araba kategorisi seç.</div>
+          <div id="vehicle-class-title-vehiclename">Galeria de Veículos</div>
+          <div id="vehicle-class-title-vehiclecategory">Escolha uma categoria de carro.</div>
       </div>
   </div>
   <div id="vehicle-class-container">
@@ -111,7 +111,7 @@
   </div>
   <div id="buy-vehicle">
       <div id="title-buy-container">
-          <div id="buy-offer">Ödeme Detayları</div>
+          <div id="buy-offer">Detalhes do Pagamento</div>
       </div>
       <div id="buy-details">
           <div class="detail">
@@ -120,7 +120,7 @@
           </div>
           <div class="detail">
               <div class="detail-icon"><i class="fas fa-money-check-alt"></i></div>
-              <div class="detail-info" id="detail-price">500,000$</div>
+              <div class="detail-info" id="detail-price">500.000$</div>
           </div>
           <div class="detail">
               <div class="detail-icon"><i class="fas fa-car-alt"></i></div>
@@ -128,28 +128,28 @@
           </div>
           <div class="detail">
               <div class="detail-icon"><i class="fas fa-fill-drip"></i></div>
-              <div class="detail-info" id="detail-color">White</div>
+              <div class="detail-info" id="detail-color">Branco</div>
           </div>
       </div>
       <div id="buy-down">
-          <div id="buy-text">Arabayı satın almak istediğine emin misin?</div>
+          <div id="buy-text">Tem certeza que deseja comprar este carro?</div>
           <div id="buy-buttons">
-              <div class="buy-button" id="back">iptal</div>
-              <div class="buy-button" id="buy">Satın Al</div>
+              <div class="buy-button" id="back">Cancelar</div>
+              <div class="buy-button" id="buy">Comprar</div>
           </div>
       </div>
   </div>
   <div id="main"></div>
   <div id="buy-notify">
-      <span>Aracı başarıyla satın aldın.</span>
-      <div style="font-size: 2.0rem; color: grey;">Aracın park yerinde.</div>
+      <span>Você comprou o veículo com sucesso.</span>
+      <div style="font-size: 2.0rem; color: grey;">Seu veículo está na garagem.</div>
   </div>
   <div id="drawmarker-container">
-      <span>[E]</span> Kataloğa Eriş
+      <span>[E]</span> Acessar Catálogo
   </div>
   <div id="test-drive-container">
       <div id="title-buy-container">
-          <div id="buy-offer">Test Sürüşü Ayrıntıları</div>
+          <div id="buy-offer">Detalhes do Test Drive</div>
       </div>
       <div id="test-details">
           <div class="test-detail">
@@ -166,15 +166,13 @@
           </div>
       </div>
       <div id="test-down">
-          <div id="test-text" style="white-space: nowrap;">Test sürüşü yapmak istediğinizden emin misiniz?</div>
+          <div id="test-text" style="white-space: nowrap;">Tem certeza que deseja fazer o test drive?</div>
           <div id="test-buttons">
-              <div class="test-button" id="test-back">İptal</div>
-              <div class="test-button" id="test-accept">Başla</div>
+              <div class="test-button" id="test-back">Cancelar</div>
+              <div class="test-button" id="test-accept">Começar</div>
           </div>
       </div>
   </div>
   <div id="test-drive-timer">
       <span id="timer"></span>
   </div>
-</body>
-</html>
