@@ -151,7 +151,7 @@ RegisterNetEvent('mri_Qvehicleshop:setVehicleOwned', function(vehicleData)
     local Player = QBCore.Functions.GetPlayer(src)
 
     MySQL.Async.insert(
-        'INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state, garage) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
                 {Player.PlayerData.license, Player.PlayerData.citizenid, vehicleData.displayName,
-                 GetHashKey(vehicleData["model"]), vehicleData["mods"], vehicleData["plate"], 0})
+                 GetHashKey(vehicleData["model"]), vehicleData["mods"], vehicleData["plate"], 1, Config.GarageName})
 end)

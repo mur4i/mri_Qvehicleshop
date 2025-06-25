@@ -9,6 +9,7 @@ Config.Core = {
 Config.Location = vector3(-33.07752, -1102.078, 26.422332) -- The location of the vehicleshop.
 Config.BoughtVehicleSpawnLocation = {coords= vector3(-53.75075, -1111.026, 25.828771),heading = 72.2} -- The location where the purchased vehicle will be spawned.
 Config.TestVehicleSpawnLocation = {coords= vector3(-997.56, -3341.85, 13.94),heading = 63.87} -- The location where the testdrive vehicle will be spawned.
+Config.GarageName = "Pillbox Garage Parking" -- The name of the garage where the purchased vehicles will be stored.
 
 Config.Blip = {
   id = 326,
