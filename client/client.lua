@@ -22,7 +22,7 @@ local function whenStarted()
     RequestModel(current)
 
     while not HasModelLoaded(current) do Wait(0) end
-    GalleryPed = CreatePed(0, 'a_m_m_business_01', -32.99, -1103.64, 25.42, 67.84, false, false)
+    GalleryPed = CreatePed(0, Config.ShopNPC.ped, Config.ShopNPC.coords.x, Config.ShopNPC.coords.y, Config.ShopNPC.coords.z, Config.ShopNPC.coords.w, false, false)
     TaskStartScenarioInPlace(GalleryPed, 'WORLD_HUMAN_COP_IDLES', true)
     FreezeEntityPosition(GalleryPed, true)
     SetEntityInvincible(GalleryPed, true)
@@ -95,7 +95,7 @@ RegisterNUICallback("spawnVehicle", function(data,cb)
         RequestModel(hash) 
         while not HasModelLoaded(hash) do Wait(250) end
         loadVeh = true
-        newVehicle = CreateVehicle(hash, -76.24, -821.28, 284.32, 160.91, false, false)
+        newVehicle = CreateVehicle(hash, Config.ShopCamera.vehicle.x, Config.ShopCamera.vehicle.y, Config.ShopCamera.vehicle.z, Config.ShopCamera.vehicle.w, false, false)
         SetVehicleCustomPrimaryColour(newVehicle, 255, 255, 255)
         SetVehicleCustomSecondaryColour(newVehicle, 255, 255, 255)
         local vehicleInfo = {
@@ -112,7 +112,7 @@ RegisterNUICallback("spawnVehicle", function(data,cb)
         RequestModel(hash)
         while not HasModelLoaded(hash) do Wait(250) end
         loadVeh = true
-        newVehicle = CreateVehicle(hash, -76.24, -821.28, 284.32, 160.91, false, false)
+        newVehicle = CreateVehicle(hash, Config.ShopCamera.vehicle.x, Config.ShopCamera.vehicle.y, Config.ShopCamera.vehicle.z, Config.ShopCamera.vehicle.w, false, false)
         SetVehicleCustomPrimaryColour(newVehicle, 255, 255, 255)
         SetVehicleCustomSecondaryColour(newVehicle, 255, 255, 255)
         local vehicleInfo = {
@@ -170,7 +170,9 @@ RegisterNUICallback("testDrive", function(data,cb)
             DoScreenFadeOut(1000)
             Wait(2000)
             TriggerServerEvent("vehicleshop:testdrive", netID)
-            SetEntityCoords(PlayerPedId(), vector3(-31.46917, -1104.683, 26 - 0.5))
+            SetEntityCoords(PlayerPedId(), Config.TestDriveFinishLocation)
+            SetEntityVisible(PlayerPedId(), true, false)
+
             DoScreenFadeIn(500)
         end
     end, Config.TestDrive.testDriveCost)
@@ -218,16 +220,17 @@ function changeCam()
     DoScreenFadeOut(500)
     Wait(1000)
     inShop = true
-    SetEntityCoords(PlayerPedId(), vector3(-62.64, -821.15, 286.9))
+    SetEntityCoords(PlayerPedId(), Config.ShopCamera.position)
     FreezeEntityPosition(PlayerPedId(), true)
+    SetEntityVisible(PlayerPedId(), false, false)
     if not DoesCamExist(cam) then
         cam = CreateCam('DEFAULT_SCRIPTED_CAMERA', true)
     end
     SetCamActive(cam, true)
     SetCamRot(cam,vector3(-15.0,0.0, 71.19), true)
     SetCamFov(cam,35.0)
-    SetCamCoord(cam, vector3(-66.27, -824.81, 286.9))
-    PointCamAtCoord(cam, vector3(-66.27, -824.81, 286.9))
+    SetCamCoord(cam, Config.ShopCamera.position)
+    PointCamAtCoord(cam, Config.ShopCamera.point)
     RenderScriptCams(true, false, 2500.0, true, true)
     DoScreenFadeIn(1000)
     Wait(1000)
@@ -323,9 +326,12 @@ RegisterNUICallback("blur",function(data,cb)
 end)
 
 AddEventHandler("onResourceStop",function(res)
-  if res ~= GetCurrentResourceName() or inShop == false then return end
-  SetEntityCoords(PlayerPedId(),Config.Location)
-  FreezeEntityPosition(PlayerPedId(),false)
+    if res ~= GetCurrentResourceName() or inShop == false then return end
+    if Config.Debug then
+        SetEntityCoords(PlayerPedId(), Config.Location)
+        FreezeEntityPosition(PlayerPedId(),false)
+        SetEntityVisible(PlayerPedId(), true, false)
+    end
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()

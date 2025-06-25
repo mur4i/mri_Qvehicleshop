@@ -144,8 +144,6 @@ RegisterNetEvent("mri_Qvehicleshop:removeStock",function(model)
     SaveResourceFile(GetCurrentResourceName(), "./stock.json", json.encode(data))
 end)
 
-
-
 RegisterNetEvent('mri_Qvehicleshop:setVehicleOwned', function(vehicleData)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
@@ -153,5 +151,5 @@ RegisterNetEvent('mri_Qvehicleshop:setVehicleOwned', function(vehicleData)
     MySQL.Async.insert(
         'INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state, garage) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
                 {Player.PlayerData.license, Player.PlayerData.citizenid, vehicleData.displayName,
-                 GetHashKey(vehicleData["model"]), vehicleData["mods"], vehicleData["plate"], 1, Config.GarageName})
+                 GetHashKey(vehicleData["model"]), vehicleData["mods"], vehicleData["plate"], 0, Config.GarageName})
 end)

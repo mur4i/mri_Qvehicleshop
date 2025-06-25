@@ -6,11 +6,27 @@ Config.Core = {
   core_resource_name = "qb-core" -- the core resource name.
 }
 
-Config.Location = vector3(-33.07752, -1102.078, 26.422332) -- The location of the vehicleshop.
-Config.BoughtVehicleSpawnLocation = {coords= vector3(-53.75075, -1111.026, 25.828771),heading = 72.2} -- The location where the purchased vehicle will be spawned.
-Config.TestVehicleSpawnLocation = {coords= vector3(-997.56, -3341.85, 13.94),heading = 63.87} -- The location where the testdrive vehicle will be spawned.
+Config.Debug = true -- Don't use this in production, this is for debugging purposes only. It will teleport everyone to the location of the vehicleshop when the resource stops.
+
+Config.ShopNPC = {
+  coords = vector4(-32.99, -1103.64, 25.42, 67.84), -- The location of the ped that will be used to open the vehicleshop.
+  ped = "a_m_m_business_01"
+}
+
+Config.LocationAfterBuy = vec4(-51.03, -1106.15, 26.44, 154.59)
 Config.GarageName = "Pillbox Garage Parking" -- The name of the garage where the purchased vehicles will be stored.
 
+Config.BoughtVehicleSpawnLocation = {coords= vector3(-53.75075, -1111.026, 25.828771),heading = 72.2} -- The location where the purchased vehicle will be spawned.
+Config.TestVehicleSpawnLocation = {coords= vector3(-997.56, -3341.85, 13.94),heading = 63.87} -- The location where the testdrive vehicle will be spawned.
+Config.TestDriveFinishLocation = vector3(-31.46917, -1104.683, 26 - 0.5) -- The location where the player will be teleported after finishing the test drive.
+
+Config.ShopCamera = {
+  vehicle = vector4(-76.24, -821.28, 284.32, 160.91),
+  position = vector3(-66.27, -824.81, 286.9),
+  point = vector3(-66.27, -824.81, 286.9)
+}
+
+Config.Location = vector3(-33.07752, -1102.078, 26.422332) -- The location of the vehicleshop.
 Config.Blip = {
   id = 326,
   color = 3,
