@@ -9,7 +9,7 @@ Config.Core = {
 Config.Debug = true -- Don't use this in production, this is for debugging purposes only. It will teleport everyone to the location of the vehicleshop when the resource stops.
 
 Config.ShopNPC = {
-  coords = vector4(-32.99, -1103.64, 25.42, 67.84), -- The location of the ped that will be used to open the vehicleshop.
+  coords = vec4(-56.92, -1099.23, 26.42, 24.4), -- The location of the ped that will be used to open the vehicleshop.
   ped = "a_m_m_business_01"
 }
 
@@ -20,11 +20,11 @@ Config.BoughtVehicleSpawnLocation = vector4(-53.75075, -1111.026, 25.828771, 72.
 Config.TestVehicleSpawnLocation = vector4(-997.56, -3341.85, 13.94, 63.87) -- The location where the testdrive vehicle will be spawned.
 Config.TestDriveFinishLocation = vec4(-34.8, -1102.85, 26.42, 245.56) -- The location where the player will be teleported after finishing the test drive.
 
-Config.vehicleShowroom = vector4(-76.24, -821.28, 284.32, 160.91)
+Config.vehicleShowroom = vec4(-42.17, -1099.07, 26.01, 158.59)
 
-Config.cameraShowroom = vector3(-66.27, -824.81, 286.9)
+Config.cameraShowroom = vec3(-50.92, -1095.95, 26.42 + 1)
 
-Config.Location = vector3(-33.07752, -1102.078, 26.422332) -- The location of the vehicleshop.
+Config.Location = vec3(-56.9, -1098.8, 26.42) -- The location of the vehicleshop.
 Config.Blip = {
   id = 326,
   color = 3,

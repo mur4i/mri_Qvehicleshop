@@ -1,6 +1,10 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local nuiMsg = false
 local pedSpawned = false
+local vehicleSpawned = false
+local newVehicle
+local loadVeh = true
+local spawnVehicle = false
 
 local function whenStarted()
     if Config.Blip.showBlip then
@@ -17,12 +21,12 @@ local function whenStarted()
     end
 
     if pedSpawned then return end
-    local current = 'a_m_m_business_01'
+    local current = Config.ShopNPC.ped
     current = type(current) == 'string' and GetHashKey(current) or current
     RequestModel(current)
 
     while not HasModelLoaded(current) do Wait(0) end
-    GalleryPed = CreatePed(0, Config.ShopNPC.ped, Config.ShopNPC.coords.x, Config.ShopNPC.coords.y, Config.ShopNPC.coords.z, Config.ShopNPC.coords.w, false, false)
+    GalleryPed = CreatePed(0, Config.ShopNPC.ped, Config.ShopNPC.coords.x, Config.ShopNPC.coords.y, Config.ShopNPC.coords.z -1.0, Config.ShopNPC.coords.w, false, false)
     TaskStartScenarioInPlace(GalleryPed, 'WORLD_HUMAN_COP_IDLES', true)
     FreezeEntityPosition(GalleryPed, true)
     SetEntityInvincible(GalleryPed, true)
@@ -83,13 +87,30 @@ RegisterNetEvent("vehicles:client:openUI",function(data,daily,buyer)
     })
 end)
 
-local vehicleSpawned = false
-local newVehicle
-local loadVeh = true
+function ClearShowroomArea()
+    local playerVeh = GetVehiclePedIsIn(PlayerPedId(), false)
+    local showroomPos = Config.vehicleShowroom
+    local radius = 5.0 
+
+    local vehicles = GetGamePool('CVehicle')
+    for _, veh in pairs(vehicles) do
+        local coords = GetEntityCoords(veh)
+        local dist = #(coords - vector3(showroomPos.x, showroomPos.y, showroomPos.z))
+
+        if dist <= radius and veh ~= playerVeh then
+            DeleteEntity(veh)
+        end
+    end
+
+    newVehicle = nil
+    spawnVehicle = false
+end
+
 RegisterNUICallback("spawnVehicle", function(data,cb)
     if not loadVeh then return end
     if not spawnVehicle then
         loadVeh = false
+        ClearShowroomArea()
         spawnVehicle = true 
         local hash = GetHashKey(data.model)
         RequestModel(hash) 
@@ -107,6 +128,7 @@ RegisterNUICallback("spawnVehicle", function(data,cb)
         SendNUIMessage({action = "updateInfo", vehicleInfo = vehicleInfo})
     else
         loadVeh = false
+        ClearShowroomArea()
         DeleteEntity(newVehicle)
         local hash = GetHashKey(data.model)
         RequestModel(hash)
@@ -138,7 +160,7 @@ RegisterNUICallback("buyVehicle", function(data,cb)
 			local modelHash = GetHashKey(vehDetails.model)
 			RequestModel(modelHash) 
 			while not HasModelLoaded(modelHash) do Wait(250) end 
-			local boughtVeh = CreateVehicle(modelHash, Config.BoughtVehicleSpawnLocation.coords,Config.BoughtVehicleSpawnLocation.heading, true, true)
+			local boughtVeh = CreateVehicle(modelHash, Config.BoughtVehicleSpawnLocation.x, Config.BoughtVehicleSpawnLocation.y, Config.BoughtVehicleSpawnLocation.z, Config.BoughtVehicleSpawnLocation.w, true, true)
 			SetVehicleColours(boughtVeh, vehDetails.gtaColor, vehDetails.gtaColor)
 			Config.BuyVehicleFunc(QBCore,boughtVeh,vehDetails.model)
 		end
